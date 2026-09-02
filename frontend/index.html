@@ -3,68 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <title>JustHireMeAlready</title>
+    <link rel="stylesheet" href="static/css/style.css">
 </head>
 <body>
-    <h1>Mis candidaturas</h1>
+    <div class="container">
+        <h1>Mis candidaturas</h1>
 
-    <!-- FORMULARIO para añadir una candidatura nueva.
-         Cada input tiene un id único: el JS lo usará para leer su valor. -->
-    <h2>Añadir candidatura</h2>
-    <form id="form-candidatura">
-        <!-- estado: un <select> porque solo hay 6 valores válidos (tu Enum).
-             Así el usuario elige de una lista, no puede escribir uno inválido. -->
-        <label>Estado:
-            <select id="estado">
-                <option value="enviada">Enviada</option>
-                <option value="contactado">Contactado</option>
-                <option value="entrevista">Entrevista</option>
-                <option value="oferta">Oferta</option>
-                <option value="rechazada">Rechazada</option>
-                <option value="pendiente">Pendiente</option>
-            </select>
-        </label><br>
+        <!-- Barra de estadísticas: el JS la rellena -->
+        <div id="stats"></div>
 
-        <!-- type="date" da un selector de calendario y devuelve fecha en formato ISO (AAAA-MM-DD),
-             justo el que espera tu API. -->
-        <label>Fecha:      <input type="date" id="fecha_peticion"></label><br>
-        <label>Empresa:    <input type="text" id="empresa"></label><br>
-        <label>Puesto:     <input type="text" id="puesto"></label><br>
-        <label>Link:       <input type="url"  id="link_oferta"></label><br>
-        <label>Portal:     <input type="text" id="portal"></label><br>
-        <label>Ubicación:  <input type="text" id="ubicacion"></label><br>
-        <label>Modalidad:  <input type="text" id="modalidad"></label><br>
+        <!-- FORMULARIO para añadir una candidatura nueva. -->
+        <h2>Añadir candidatura</h2>
+        <form id="form-candidatura">
+            <label>Estado:
+                <select id="estado">
+                    <option value="enviada">Enviada</option>
+                    <option value="contactado">Contactado</option>
+                    <option value="entrevista">Entrevista</option>
+                    <option value="oferta">Oferta</option>
+                    <option value="rechazada">Rechazada</option>
+                    <option value="pendiente">Pendiente</option>
+                </select>
+            </label>
 
-        <!-- type="button" (no "submit") para que NO recargue la página al pulsarlo;
-             el JS controlará qué pasa al hacer clic. -->
-        <button type="button" id="btn-anadir">Añadir</button>
-    </form>
+            <label>Fecha:
+                <input type="date" id="fecha_peticion">
+            </label>
 
-    <hr>
+            <label>Empresa:
+                <input type="text" id="empresa" placeholder="Ej: Indra">
+            </label>
 
-    <!-- ZONA DE LISTADO: vacía a propósito.
-         El JS rellenará este <tbody> con una fila por cada candidatura. -->
-    <h2>Listado</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Empresa</th>
-                <th>Puesto</th>
-                <th>Estado</th>
-                <th>Fecha</th>
-                <th>Ubicación</th>
-                <th>Modalidad</th>
-                <th>Portal</th>
-                <th>Link</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody id="lista-candidaturas">
-            <!-- aquí irán las filas, generadas por JS -->
-        </tbody>
-    </table>
+            <label>Puesto:
+                <input type="text" id="puesto" placeholder="Ej: SOC Analyst">
+            </label>
 
-    <!-- Carga tu JS. 'defer' hace que se ejecute después de cargar el HTML,
-         así el JS encuentra los elementos ya creados. -->
+            <label>Link:
+                <input type="url" id="link_oferta" placeholder="https://...">
+            </label>
+
+            <label>Portal:
+                <input type="text" id="portal" placeholder="Ej: LinkedIn">
+            </label>
+
+            <label>Ubicación:
+                <input type="text" id="ubicacion" placeholder="Ej: A Coruña">
+            </label>
+
+            <label>Modalidad:
+                <input type="text" id="modalidad" placeholder="Ej: Remoto">
+            </label>
+
+            <button type="button" id="btn-anadir">Añadir</button>
+        </form>
+
+        <!-- ZONA DE LISTADO -->
+        <h2>Listado</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Empresa</th>
+                    <th>Puesto</th>
+                    <th>Estado</th>
+                    <th>Fecha</th>
+                    <th>Ubicación</th>
+                    <th>Modalidad</th>
+                    <th>Portal</th>
+                    <th>Link</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="lista-candidaturas">
+                <!-- filas generadas por JS -->
+            </tbody>
+        </table>
+    </div>
+
     <script src="static/js/main.js" defer></script>
 </body>
 </html>

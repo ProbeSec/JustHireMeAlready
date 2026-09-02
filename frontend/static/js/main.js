@@ -5,21 +5,20 @@ async function cargarCandidaturas() {
 
     // Agarramos la tabla
     const tbody = document.getElementById("lista-candidaturas");
-    tbody.innerHTML = "";   // Vacía la tabla antes de rellenar (evita duplicados al recargar)
+    tbody.innerHTML = "";   // Vacía la tabla antes de rellenar (evita duplicados)
 
     // Recorremos las candidaturas
     datos.forEach(function(candidatura) {
-        // Por CADA candidatura, metemos una fila
         tbody.innerHTML += `
             <tr>
-                <td>${candidatura[3]}</td>   <!-- empresa -->
-                <td>${candidatura[4]}</td>   <!-- puesto -->
-                <td>${candidatura[1]}</td>   <!-- estado -->
-                <td>${candidatura[2]}</td>   <!-- fecha -->
-                <td>${candidatura[7]}</td>   <!-- ubicacion -->
-                <td>${candidatura[8]}</td>   <!-- modalidad -->
-                <td>${candidatura[6]}</td>   <!-- portal -->
-                <td><a href="${candidatura[5]}" target="_blank">Ver</a></td>   <!-- link_oferta -->
+                <td>${candidatura[3]}</td>
+                <td>${candidatura[4]}</td>
+                <td><span class="estado-badge estado-${candidatura[1]}">${candidatura[1]}</span></td>
+                <td>${candidatura[2]}</td>
+                <td>${candidatura[7]}</td>
+                <td>${candidatura[8]}</td>
+                <td>${candidatura[6]}</td>
+                <td><a href="${candidatura[5]}" target="_blank">Ver</a></td>
                 <td>
                     <button onclick="borrarCandidatura('${candidatura[0]}')">Borrar</button>
                     <button onclick="cambiarEstado('${candidatura[0]}')">Estado</button>
@@ -28,6 +27,20 @@ async function cargarCandidaturas() {
             </tr>
         `;
     });
+
+    // --- Contador de estadísticas ---
+    const stats = document.getElementById("stats");
+    const total = datos.length;
+    const ofertas = datos.filter(c => c[1] === "oferta").length;
+    const entrevistas = datos.filter(c => c[1] === "entrevista").length;
+    const rechazadas = datos.filter(c => c[1] === "rechazada").length;
+
+    stats.innerHTML = `
+        <div class="stat"><div class="num">${total}</div><div class="label">Total</div></div>
+        <div class="stat"><div class="num">${ofertas}</div><div class="label">Ofertas</div></div>
+        <div class="stat"><div class="num">${entrevistas}</div><div class="label">Entrevistas</div></div>
+        <div class="stat"><div class="num">${rechazadas}</div><div class="label">Rechazadas</div></div>
+    `;
 }
 
 async function borrarCandidatura(id) {
@@ -62,7 +75,7 @@ async function cambiarEstado(id) {
     const nuevoEstado = prompt("Nuevo estado (enviada/contactado/entrevista/oferta/rechazada/pendiente):");
 
     if (nuevoEstado === null) {
-        return;   // Si cancela, no hacemos nada
+        return;
     }
 
     await fetch("http://127.0.0.1:8000/candidaturas/" + id, {

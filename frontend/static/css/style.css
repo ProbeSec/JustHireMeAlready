@@ -1,0 +1,260 @@
+/* --- Base: tema oscuro minimalista --- */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+    margin: 0;
+    padding: 40px 50px;
+    background-color: #0d1117;
+    color: #c9d1d9;
+    line-height: 1.6;
+}
+
+/* Contenedor central con ancho máximo (mejora 2) */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+h1 {
+    color: #58a6ff;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+h1::before {
+    content: "> ";
+    color: #388bfd;
+}
+
+h1::after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background-color: #3fb950;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #3fb950;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+h2 {
+    color: #8b949e;
+    font-size: 13px;
+    margin-top: 40px;
+    margin-bottom: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+}
+
+/* Barra de estadísticas / contador (mejora 3) */
+#stats {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.stat {
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 14px 20px;
+    min-width: 110px;
+}
+
+.stat .num {
+    font-size: 22px;
+    font-weight: 700;
+    color: #58a6ff;
+}
+
+.stat .label {
+    font-size: 10px;
+    color: #8b949e;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* --- Formulario horizontal --- */
+form {
+    background-color: #161b22;
+    padding: 24px 28px;
+    border: 1px solid #30363d;
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: flex-end;
+    justify-content: flex-start;                   /* alineado a la izquierda (mejora 1) */
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+form::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #1f6feb, #58a6ff, #388bfd);
+    border-radius: 10px 10px 0 0;
+}
+
+form label {
+    display: flex;
+    flex-direction: column;
+    font-size: 11px;
+    color: #8b949e;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    gap: 5px;
+}
+
+form input,
+form select {
+    padding: 8px 11px;
+    background-color: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    color: #c9d1d9;
+    font-family: inherit;
+    font-size: 13px;
+    min-width: 140px;
+}
+
+form input::placeholder {
+    color: #484f58;                                /* placeholders gris tenue (mejora 4) */
+}
+
+form input:focus,
+form select:focus {
+    outline: none;
+    border-color: #58a6ff;
+    box-shadow: 0 0 0 2px rgba(88, 166, 255, 0.25);
+}
+
+/* El botón añadir se empuja al final de la fila */
+#btn-anadir {
+    background-color: #1f6feb;
+    color: #ffffff;
+    border: none;
+    padding: 9px 22px;
+    font-weight: 600;
+    height: fit-content;
+    margin-left: auto;                             /* lo empuja a la derecha */
+}
+
+#btn-anadir:hover {
+    background-color: #388bfd;
+    color: #ffffff;
+}
+
+/* --- Botones --- */
+button {
+    background-color: #21262d;
+    color: #c9d1d9;
+    border: 1px solid #30363d;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 13px;
+    transition: all 0.15s;
+}
+
+button:hover {
+    border-color: #58a6ff;
+    color: #58a6ff;
+}
+
+td button {
+    padding: 4px 10px;
+    font-size: 12px;
+    margin-right: 4px;
+}
+
+/* --- Tabla --- */
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+}
+
+th, td {
+    padding: 13px 16px;
+    text-align: left;
+    border-bottom: 1px solid #21262d;
+    font-size: 13px;
+}
+
+th {
+    background-color: #0d1117;
+    color: #8b949e;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+tbody tr {
+    transition: background-color 0.12s;
+}
+
+tbody tr:hover {
+    background-color: #1c2128;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+td a {
+    color: #58a6ff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+td a:hover {
+    text-decoration: underline;
+    color: #79c0ff;
+}
+
+/* --- Badges de estado --- */
+.estado-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.estado-enviada     { background: #1f6feb33; color: #58a6ff; border: 1px solid #1f6feb66; }
+.estado-contactado  { background: #a371f733; color: #a371f7; border: 1px solid #a371f766; }
+.estado-entrevista  { background: #d2992233; color: #e3b341; border: 1px solid #d2992266; }
+.estado-oferta      { background: #2ea04333; color: #3fb950; border: 1px solid #2ea04366; }
+.estado-rechazada   { background: #f8514933; color: #f85149; border: 1px solid #f8514966; }
+.estado-pendiente   { background: #8b949e33; color: #8b949e; border: 1px solid #8b949e66; }
+
+hr {
+    display: none;
+}
