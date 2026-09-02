@@ -2,7 +2,7 @@ from fastapi import FastAPI          # El framework web
 from pydantic import BaseModel       # Para crear modelos de datos que validan la entrada
 from enum import Enum                # Para definir listas cerradas de valores válidos
 import db                            # Nuestra capa de datos (db.py) con todo el SQL
-
+from fastapi.middleware.cors import CORSMiddleware # Importa el middleware
 
 # --- MODELOS DE DATOS (validación de entrada) ---
 
@@ -35,6 +35,13 @@ class EstadoUpdate(BaseModel):
 
 app = FastAPI()                      # Crea la aplicación. uvicorn busca esta variable 'app'.
 
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://127.0.0.1:5500"],   # el origen de tu frontend (Live Server)
+    allow_methods=["*"],                        # permite todos los métodos (GET, POST, PUT...)
+    allow_headers=["*"],                        # permite todas las cabeceras
+)
 
 # --- ENDPOINTS (las URLs que expone la API) ---
 
